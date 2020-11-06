@@ -113,15 +113,12 @@ class Game{
                         var fruit = fruitGroup.get(i);
 
                      if(fruitGroup.isTouching(player1)){
-
-                         console.log("Ankur is defeated");
                          score1++;
                          database.ref("/players/player1/score").set(score1);
 
                          fruit.destroy();
                      }
                       else if(fruitGroup.isTouching(player2)){
-                         console.log("Ankur won");
                          score2++;
                          database.ref("/players/player2/score").set(score2);
 
@@ -129,9 +126,15 @@ class Game{
                      }
                     }
                   }
-    }
 
-    end(){
-       console.log("Game Ended");
+
+                  if(scores1 === 10 || scores2 === 10){
+                    swal({
+                        text: "Game Over!",
+                        icon: "info",
+                      });
+                      gameState = "End";
+
+                  }
     }
 }
